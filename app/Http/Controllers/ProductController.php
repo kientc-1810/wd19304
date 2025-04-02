@@ -19,7 +19,7 @@ class ProductController extends Controller
             $query->where('name', 'like', '%' . $request->search . '%');
         }
         $products = $query->orderBy('id', 'desc')->paginate(5);
-        return view('products.index', compact('products'));
+        return view('admin.products.index', compact('products'));
     }
 
     /**
@@ -28,7 +28,7 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::query()->where('status', 1)->get();
-        return view('products.create', compact('categories'));
+        return view('admin.products.create', compact('categories'));
     }
 
     /**
@@ -58,7 +58,7 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $categories = Category::query()->where('status',1)->get();
-        return view('products.edit',compact('product','categories'));
+        return view('admin.products.edit',compact('product','categories'));
     }
 
     /**

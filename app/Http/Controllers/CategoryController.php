@@ -30,7 +30,7 @@ class CategoryController extends Controller
             $query->where('name','like','%'.$request->search.'%');
         }
         $categories = $query->orderBy('id','desc')->paginate(5);
-        return view('categories.index',compact('categories'));
+        return view('admin.categories.index',compact('categories'));
     }
 
     /**
@@ -38,7 +38,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('categories.create');
+        return view('admin.categories.create');
     }
 
     /**
@@ -78,7 +78,7 @@ class CategoryController extends Controller
         // return view('categories.edit',compact('category'));
 
         // eloquent
-        return view('categories.edit',compact('category'));
+        return view('admin.categories.edit',compact('category'));
     }
 
     /**

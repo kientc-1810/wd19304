@@ -1,44 +1,43 @@
-@extends('layouts.app')
 
-@if (session('success'))
+@extends('admin.layouts.app')
+
+@if(session('succcess'))
     <div class="alert alert-success">
-        {{ session('success') }}
+        {{ session('success')}}
     </div>
 @endif
-@if (session('error'))
+@if(session('error'))
     <div class="alert alert-danger">
-        {{ session('error') }}
+        {{ session('error')}}
     </div>
 @endif
 
-@section('title', 'Sửa danh mục')
+@section('title','Thêm sản phẩm')
 @section('content')
     <div class="card">
         <div class="card-header">
-            <h4>Sửa sản phẩm</h4>
+            <h4>Thêm sản phẩm</h4>
         </div>
         <div class="card-body">
-            <form action="{{ route('products.update', $product->id) }}" method="post" enctype="multipart/form-data">
+            <form action="{{route('products.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
-                @method('PUT')
                 <div class="mb-3">
                     <label class="form-label">Tên sản phẩm</label>
-                    <input type="text" name="name" class="form-control" value="{{ old('name', $product->name) }}">
+                    <input type="text" name="name" class="form-control">
                     @error('name')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Giá</label>
-                    <input type="text" name="price" class="form-control" value="{{ old('price', $product->price) }}">
+                    <input type="text" name="price" class="form-control">
                     @error('price')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Số lượng</label>
-                    <input type="text" name="quantity" class="form-control"
-                        value="{{ old('quantity', $product->quantity) }}">
+                    <input type="text" name="quantity" class="form-control">
                     @error('quantity')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -46,7 +45,6 @@
                 <div class="mb-3">
                     <label class="form-label">Hình ảnh</label>
                     <input type="file" name="image" class="form-control">
-                    <img src="{{ asset('storage/' . $product->image) }}" width="100" alt="">
                     @error('image')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -55,8 +53,7 @@
                     <label class="form-label">Danh mục</label>
                     <select name="category_id" class="form-control">
                         @foreach ($categories as $category)
-                        <option value="{{ $category->id }}" {{ $product->category_id == $category->id ? 'selected' : '' }}>
-                        {{ $category->name}}</option>
+                        <option value="{{$category->id}}">{{$category->name}}</option>
                         @endforeach
                     </select>
                     @error('category_id')
@@ -65,8 +62,7 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Mô tả</label>
-                    <input type="text" name="description" class="form-control"
-                        value="{{ old('description', $product->description) }}">
+                    <input type="text" name="description" class="form-control">
                     @error('description')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -74,14 +70,14 @@
                 <div class="mb-3">
                     <label class="form-label">Trạng thái</label>
                     <select name="status" class="form-control">
-                        <option value="1" {{ $product->status == 1 ? 'selected' : '' }}>Hoạt động</option>
-                        <option value="0" {{ $product->status == 0 ? 'selected' : '' }}>Tạm dừng</option>
+                        <option value="1">Hoạt động</option>
+                        <option value="0">Tạm dừng</option>
                     </select>
                     @error('status')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
-                <button type="submit" class="btn btn-primary">Cập nhật</button>
+                <button type="submit" class="btn btn-success">Thêm sản phẩm</button>
             </form>
         </div>
     </div>

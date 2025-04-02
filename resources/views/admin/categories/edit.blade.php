@@ -1,5 +1,5 @@
 
-@extends('layouts.app')
+@extends('admin.layouts.app')
 
 @if(session('success'))
     <div class="alert alert-success">
